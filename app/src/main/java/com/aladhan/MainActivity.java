@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,10 +48,18 @@ public class MainActivity extends AppCompatActivity {
                                 while((inputLine = in.readLine()) != null){
                                     response.append(inputLine);
                                 }
+
+                                JSONObject response_obj = new JSONObject(response.toString());
+                                String query = response_obj.getString("Fajr");
                             }
+
+
                         } catch (MalformedURLException e) {
                             e.getMessage();
                         } catch (IOException e) {
+                            e.getMessage();
+                        }
+                        catch (JSONException e) {
                             e.getMessage();
                         }
                     }
