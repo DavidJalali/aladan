@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                     URL obj = new URL("http://api.aladhan.com/v1/calendarByCity?city=Tehran&country=IR&method=8&month=12&year=2019");
                     HttpURLConnection con = (HttpURLConnection) obj.openConnection();
                     con.setRequestMethod("GET");
-                    con.setRequestProperty("User-Agent", "Mozila/5.0");
+                   // con.setRequestProperty("User-Agent", "Mozila/5.0");
                     int responseCode = con.getResponseCode();
                     if (responseCode == HttpURLConnection.HTTP_OK) {
                         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 } catch (MalformedURLException e) {
-
+                    e.getMessage();
                 } catch (IOException e) {
-
+e.getMessage();
                 }
             }
         });
