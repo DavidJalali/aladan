@@ -28,26 +28,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText et = (EditText) findViewById(R.id.etsearch);
-                try {
-                    URL obj = new URL("http://api.aladhan.com/v1/calendarByCity?city=Tehran&country=IR&method=8&month=12&year=2019");
-                    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                    con.setRequestMethod("GET");
-                   // con.setRequestProperty("User-Agent", "Mozila/5.0");
-                    int responseCode = con.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                        String inputLine = null;
-                        StringBuffer response = new StringBuffer();
+                Thread thread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            URL obj = new URL("http://api.aladhan.com/v1/calendarByCity?city=Tehran&country=IR&method=8&month=12&year=2019");
+                            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                            con.setRequestMethod("GET");
+                             con.setRequestProperty("User-Agent", "Mozila/5.0");
+                            int responseCode = con.getResponseCode();
+                            if (responseCode == HttpURLConnection.HTTP_OK) {
+                                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                                String inputLine = null;
+                                StringBuffer response = new StringBuffer();
 
-                        while((inputLine = in.readLine()) != null){
-                            response.append(inputLine);
+                                while((inputLine = in.readLine()) != null){
+                                    response.append(inputLine);
+                                }
+                            }
+                        } catch (MalformedURLException e) {
+                            e.getMessage();
+                        } catch (IOException e) {
+                            e.getMessage();
                         }
                     }
-                } catch (MalformedURLException e) {
-                    e.getMessage();
-                } catch (IOException e) {
-e.getMessage();
-                }
+                });
+                thread.start();
             }
         });
 
