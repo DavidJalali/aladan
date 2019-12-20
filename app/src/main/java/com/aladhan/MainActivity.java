@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 JSONObject response_obj = new JSONObject(response.toString());
                                 String query = response_obj.getString("Fajr");
+                                query = "";
                             }
 
 
