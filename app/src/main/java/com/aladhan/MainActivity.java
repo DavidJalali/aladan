@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
         Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText et = (EditText) findViewById(R.id.etsearch);
+               final EditText et = (EditText) findViewById(R.id.etsearch);
                 Thread thread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            URL obj = new URL("http://api.aladhan.com/v1/calendarByCity?city=Tehran&country=IR&method=8&month=12&year=2019");
+                            URL obj = new URL("http://api.aladhan.com/v1/calendarByCity?city="+et.getText()+"&country=IR&method=8&month=12&year=2019");
                             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
                             con.setRequestMethod("GET");
                              con.setRequestProperty("User-Agent", "Mozila/5.0");
